@@ -10,7 +10,7 @@ public class Producer {
         String IP_PORT_Bootstrap_Servers = "192.168.252.100:9092, 192.168.252.100:9093, 192.168.252.100:9094";
         String Topic_Name = "numbers";
 
-        String client_id = "My-Producer";
+        String client_id = "My_Producer";
 
         // REF: https://kafka.apache.org/25/javadoc/index.html?org/apache/kafka/clients/producer/KafkaProducer.html
         Properties props = new Properties();
@@ -19,27 +19,11 @@ public class Producer {
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
-
         KafkaProducer<String, String> producer = new KafkaProducer<String, String>(props);
-
 
         int Number_of_Records = 10;
 
-        // EXAMPLE 1 Messages, Keys and Values as a String
-//        try{
-//            for (int i = 0; i < Number_of_Records; i++) {
-//                String message = String.format("Producer %s has sent %s message at %s", client_id, i, new Date());
-//
-//                producer.send(new ProducerRecord<String, String>(Topic_Name, Integer.toString(i), Integer.toString(i)));
-//            }
-//        } catch (Exception e){
-//            e.printStackTrace();
-//        } finally {
-//            producer.close();
-//        }
-
-
-        //EXAMPLE 2: Formatted string as message and messages are sent with 300ms delay (3 messages / second)
+        //EXAMPLE: Formatted string as message and messages are sent with 300ms delay (3 messages / second)
         try {
             for (int i = 0; i < Number_of_Records; i++) {
                 String message = String.format("Producer %s has sent message %s at %s", client_id, i, new Date());
@@ -52,10 +36,5 @@ public class Producer {
         } finally {
             producer.close();
         }
-
-
-
-
-
     }
 }
